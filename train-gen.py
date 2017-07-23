@@ -64,7 +64,8 @@ def generator(samples, batch_size=32):
 train_generator = generator(train_samples, batch_size=32)
 validation_generator = generator(validation_samples, batch_size=32)
 
-ch, row, col = 3, 80, 320  # Trimmed image format
+# ch, row, col = 3, 80, 320  # Trimmed image format
+ch, row, col = 3, 160, 320  # Trimmed image format
 
 from keras.models import Sequential
 from keras.layers import Flatten, Dense, Lambda, Activation
@@ -79,6 +80,8 @@ model.add(Cropping2D(cropping=((50,20), (0,0)), input_shape=(160,320,3)))
 model.add(Lambda(lambda x: x/127.5 - 1.,
         input_shape=(ch, row, col),
         output_shape=(ch, row, col)))
+# model.add(Lambda(lambda x: (x / 255) - 0.5, input_shape=(160,320,3)))
+        
 model.add(Convolution2D(24, 5, 5, activation='relu'))
 model.add(MaxPooling2D())
 #model.add(Dropout(0.5))??
