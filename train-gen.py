@@ -4,7 +4,7 @@ import csv
 DATA_FOLDER = '../data/'
 
 samples = []
-with open('./driving_log.csv') as csvfile:
+with open(DATA_FOLDER + '/driving_log.csv') as csvfile:
     reader = csv.reader(csvfile)
     for line in reader:
         samples.append(line)
