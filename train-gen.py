@@ -15,7 +15,7 @@ samples = []
 data_folders = FLAGS.data.split(',')
 
 for data_folder in data_folders:
-    with open(FLAGS.data + '/driving_log.csv') as csvfile:
+    with open(data_folder + '/driving_log.csv') as csvfile:
         reader = csv.reader(csvfile)
         for line in reader:
             samples.append(line)
