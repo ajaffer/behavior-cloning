@@ -1,5 +1,6 @@
 import os
 import csv
+import tensorflow as tf
 
 DATA_FOLDER = '../data/'
 flags = tf.app.flags
