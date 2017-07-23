@@ -43,8 +43,8 @@ def generator(samples, batch_size=32):
                 brake = float(batch_sample[5])
                 speed = float(batch_sample[6])
                 correction = 0.2
-                left_angle = steering_center + correction
-                right_angle = steering_center - correction
+                left_angle = center_angle + correction
+                right_angle = center_angle - correction
 
                 images.extend([center_image, left_image, right_image])
                 measurements.append([center_angle, throttle, brake, speed])
