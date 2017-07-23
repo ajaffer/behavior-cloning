@@ -66,6 +66,12 @@ validation_generator = generator(validation_samples, batch_size=32)
 
 ch, row, col = 3, 80, 320  # Trimmed image format
 
+from keras.models import Sequential
+from keras.layers import Flatten, Dense, Lambda, Activation
+from keras.layers import Cropping2D
+from keras.layers.convolutional import Conv2D
+from keras.layers.pooling import MaxPooling2D
+
 model = Sequential()
 model.add(Cropping2D(cropping=((50,20), (0,0)), input_shape=(160,320,3)))
 # Preprocess incoming data, centered around zero with small standard deviation 
