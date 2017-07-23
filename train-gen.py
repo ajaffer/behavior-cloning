@@ -8,6 +8,7 @@ FLAGS = flags.FLAGS
 
 flags.DEFINE_boolean('use_adv_measurements', '', "Boolean, if the algo should use adv. measurments: like throttle, brake and speed")
 flags.DEFINE_boolean('use_lenet', '', "Boolean, use LeNet or Nvidia's model")
+flags.DEFINE_string('model_name', '', "String, output model name")
 
 samples = []
 with open(DATA_FOLDER + '/driving_log.csv') as csvfile:
@@ -137,4 +138,4 @@ else:
 model.compile(loss='mse', optimizer='adam')
 history = model.fit_generator(train_generator, samples_per_epoch=len(train_samples), validation_data=validation_generator, nb_val_samples=len(validation_samples), nb_epoch=5,  verbose=1)
 
-model.save('model.h5')
+model.save(FLAGS.model_name)
