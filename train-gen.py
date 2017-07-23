@@ -26,7 +26,7 @@ train_samples, validation_samples = train_test_split(samples, test_size=0.2)
 def get_image(source_path):
    filename = source_path.split('/')[-1]
    foldername = source_path.split('/')[-3]
-   path = foldername + 'IMG/'  + filename
+   path = foldername + '/IMG/'  + filename
    #print(path)
    return cv2.imread(path)
 
