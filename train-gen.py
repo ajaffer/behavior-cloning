@@ -75,11 +75,11 @@ from keras.layers.convolutional import Convolution2D
 from keras.layers.pooling import MaxPooling2D
 
 model = Sequential()
-model.add(Cropping2D(cropping=((50,20), (0,0)), input_shape=(160,320,3)))
+model.add(Cropping2D(cropping=((50,20), (0,0)), input_shape=(row, col, ch)))
 # Preprocess incoming data, centered around zero with small standard deviation 
 model.add(Lambda(lambda x: x/127.5 - 1.,
-        input_shape=(ch, row, col),
-        output_shape=(ch, row, col)))
+        input_shape=(row, col, ch),
+        output_shape=(row, col, ch)))
 # model.add(Lambda(lambda x: (x / 255) - 0.5, input_shape=(160,320,3)))
         
 model.add(Convolution2D(24, 5, 5, activation='relu'))
