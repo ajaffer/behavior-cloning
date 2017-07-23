@@ -70,6 +70,7 @@ from keras.models import Sequential
 from keras.layers import Flatten, Dense, Lambda, Activation
 from keras.layers import Cropping2D
 from keras.layers.convolutional import Conv2D
+from keras.layers.convolutional import Convolution2D
 from keras.layers.pooling import MaxPooling2D
 
 model = Sequential()
