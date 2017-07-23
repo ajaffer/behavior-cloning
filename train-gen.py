@@ -15,7 +15,8 @@ samples = []
 data_folders = FLAGS.data.split(',')
 
 for data_folder in data_folders:
-    with open(data_folder + '/driving_log.csv') as csvfile:
+    print('../' + data_folder + '/driving_log.csv')
+    with open('../' + data_folder + '/driving_log.csv') as csvfile:
         reader = csv.reader(csvfile)
         for line in reader:
             samples.append(line)
@@ -24,9 +25,10 @@ from sklearn.model_selection import train_test_split
 train_samples, validation_samples = train_test_split(samples, test_size=0.2)
 
 def get_image(source_path):
+   #print(source_path)
    filename = source_path.split('/')[-1]
    foldername = source_path.split('/')[-3]
-   path = foldername + '/IMG/'  + filename
+   path = ('../' + foldername.strip() + '/IMG/'  + filename)
    #print(path)
    return cv2.imread(path)
 
