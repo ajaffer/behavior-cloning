@@ -2,16 +2,16 @@ import os
 import csv
 import tensorflow as tf
 
-DATA_FOLDER = '../data/'
 flags = tf.app.flags
 FLAGS = flags.FLAGS
 
 flags.DEFINE_boolean('use_adv_measurements', '', "Boolean, if the algo should use adv. measurments: like throttle, brake and speed")
 flags.DEFINE_boolean('use_lenet', '', "Boolean, use LeNet or Nvidia's model")
 flags.DEFINE_string('model_name', '', "String, output model name")
+flags.DEFINE_string('data', '', "String, data folder location")
 
 samples = []
-with open(DATA_FOLDER + '/driving_log.csv') as csvfile:
+with open(FLAGS.data + '/driving_log.csv') as csvfile:
     reader = csv.reader(csvfile)
     for line in reader:
         samples.append(line)
@@ -21,7 +21,7 @@ train_samples, validation_samples = train_test_split(samples, test_size=0.2)
 
 def get_image(source_path):
    filename = source_path.split('/')[-1]
-   path = DATA_FOLDER + 'IMG/'  + filename
+   path = FLAGS.data + 'IMG/'  + filename
    #print(path)
    return cv2.imread(path)
 
