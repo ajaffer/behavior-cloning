@@ -2,6 +2,10 @@ import os
 import csv
 
 DATA_FOLDER = '../data/'
+flags = tf.app.flags
+FLAGS = flags.FLAGS
+
+flags.DEFINE_boolean('use_adv_measurements', '', "Boolean, if the algo should use adv. measurments: like throttle, brake and speed")
 
 samples = []
 with open(DATA_FOLDER + '/driving_log.csv') as csvfile:
@@ -48,10 +52,12 @@ def generator(samples, batch_size=32):
                 right_angle = center_angle - correction
 
                 images.extend([center_image, left_image, right_image])
-                #measurements.extend([center_angle, left_angle, right_angle])
-                measurements.append([center_angle, throttle, brake, speed])
-                measurements.append([left_angle, throttle, brake, speed])
-                measurements.append([right_angle, throttle, brake, speed])
+                if (FLAGS.use_adv_measurements):
+                    measurements.append([center_angle, throttle, brake, speed])
+                    measurements.append([left_angle, throttle, brake, speed])
+                    measurements.append([right_angle, throttle, brake, speed])
+                else:
+                    measurements.extend([center_angle, left_angle, right_angle])
 
             #augment images
             augmented_images, augmented_measurements = [], []
@@ -117,8 +123,13 @@ def nvidia(num_output):
     model.add(Dense(num_output))
 
 
-# LeNet(1)
-nvidia(4)
+num_output = 1
+if(FLAGS.use_adv_measurements):
+    num_output = 4
+# LeNet(num_output)
+nvidia(num_output)
 
 model.compile(loss='mse', optimizer='adam')
-model.fit_generator(train_generator, samples_per_epoch=len(train_samples), validation_data=validation_generator, nb_val_samples=len(validation_samples), nb_epoch=3,  verbose=1)
+history = model.fit_generator(train_generator, samples_per_epoch=len(train_samples), validation_data=validation_generator, nb_val_samples=len(validation_samples), nb_epoch=3,  verbose=1)
+
+model.save('model.h5')
