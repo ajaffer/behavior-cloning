@@ -48,10 +48,10 @@ def generator(samples, batch_size=32):
                 right_angle = center_angle - correction
 
                 images.extend([center_image, left_image, right_image])
-                #measurements.extend([center_angle, left_angle, right_angle])
-                measurements.append([center_angle, throttle, brake, speed])
-                measurements.append([left_angle, throttle, brake, speed])
-                measurements.append([right_angle, throttle, brake, speed])
+                measurements.extend([center_angle, left_angle, right_angle])
+                #measurements.append([center_angle, throttle, brake, speed])
+                #measurements.append([left_angle, throttle, brake, speed])
+                #measurements.append([right_angle, throttle, brake, speed])
 
             #augment images
             augmented_images, augmented_measurements = [], []
@@ -59,8 +59,8 @@ def generator(samples, batch_size=32):
                 augmented_images.append(image)
                 augmented_measurements.append(measurement)
                 augmented_images.append(cv2.flip(image,1))
-                #augmented_measurements.append(measurement * - 1.0)
-                augmented_measurements.append([measurement[0] * - 1.0, measurement[1], measurement[2], measurement[3]])
+                augmented_measurements.append(measurement * - 1.0)
+                #augmented_measurements.append([measurement[0] * - 1.0, measurement[1], measurement[2], measurement[3]])
 
             # trim image to only see section with road
             X_train = np.array(augmented_images)
@@ -105,7 +105,7 @@ model.add(MaxPooling2D())
 model.add(Flatten())
 model.add(Dense(120))
 model.add(Dense(84))
-model.add(Dense(4))
+model.add(Dense(1))
 
 
 model.compile(loss='mse', optimizer='adam')
