@@ -68,8 +68,10 @@ def generator(samples, batch_size=32):
                 augmented_images.append(image)
                 augmented_measurements.append(measurement)
                 augmented_images.append(cv2.flip(image,1))
-                #augmented_measurements.append(measurement * - 1.0)
-                augmented_measurements.append([measurement[0] * - 1.0, measurement[1], measurement[2], measurement[3]])
+                if (FLAGS.use_adv_measurements):
+                   augmented_measurements.append([measurement[0] * - 1.0, measurement[1], measurement[2], measurement[3]])
+                else:
+                   augmented_measurements.append(measurement * - 1.0)
 
             # trim image to only see section with road
             X_train = np.array(augmented_images)
