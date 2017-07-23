@@ -48,10 +48,10 @@ def generator(samples, batch_size=32):
                 right_angle = center_angle - correction
 
                 images.extend([center_image, left_image, right_image])
-                measurements.extend([center_angle, left_angle, right_angle])
-                #measurements.append([center_angle, throttle, brake, speed])
-                #measurements.append([left_angle, throttle, brake, speed])
-                #measurements.append([right_angle, throttle, brake, speed])
+                #measurements.extend([center_angle, left_angle, right_angle])
+                measurements.append([center_angle, throttle, brake, speed])
+                measurements.append([left_angle, throttle, brake, speed])
+                measurements.append([right_angle, throttle, brake, speed])
 
             #augment images
             augmented_images, augmented_measurements = [], []
@@ -59,8 +59,8 @@ def generator(samples, batch_size=32):
                 augmented_images.append(image)
                 augmented_measurements.append(measurement)
                 augmented_images.append(cv2.flip(image,1))
-                augmented_measurements.append(measurement * - 1.0)
-                #augmented_measurements.append([measurement[0] * - 1.0, measurement[1], measurement[2], measurement[3]])
+                #augmented_measurements.append(measurement * - 1.0)
+                augmented_measurements.append([measurement[0] * - 1.0, measurement[1], measurement[2], measurement[3]])
 
             # trim image to only see section with road
             X_train = np.array(augmented_images)
@@ -118,7 +118,7 @@ def nvidia(num_output):
 
 
 # LeNet(1)
-nvidia(1)
+nvidia(4)
 
 model.compile(loss='mse', optimizer='adam')
-model.fit_generator(train_generator, samples_per_epoch=len(train_samples), validation_data=validation_generator, nb_val_samples=len(validation_samples), nb_epoch=3)
+model.fit_generator(train_generator, samples_per_epoch=len(train_samples), validation_data=validation_generator, nb_val_samples=len(validation_samples), nb_epoch=3,  verbose=1)
