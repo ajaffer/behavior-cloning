@@ -17,6 +17,10 @@ def get_image(source_path):
    path = DATA_FOLDER  + filename
    return cv2.imread(path)
 
+def shuffle(array):
+    import random
+    return random.shuffle(array)
+
 import cv2
 import numpy as np
 import sklearn
