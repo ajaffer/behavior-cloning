@@ -6,6 +6,7 @@ flags = tf.app.flags
 FLAGS = flags.FLAGS
 
 flags.DEFINE_boolean('use_adv_measurements', '', "Boolean, if the algo should use adv. measurments: like throttle, brake and speed")
+flags.DEFINE_boolean('use_lenet', '', "Boolean, use LeNet or Nvidia's model")
 
 samples = []
 with open(DATA_FOLDER + '/driving_log.csv') as csvfile:
@@ -126,10 +127,13 @@ def nvidia(num_output):
 num_output = 1
 if(FLAGS.use_adv_measurements):
     num_output = 4
-# LeNet(num_output)
-nvidia(num_output)
+
+if (FLAGS.use_lenet):
+    LeNet(num_output)
+else:    
+    nvidia(num_output)
 
 model.compile(loss='mse', optimizer='adam')
-history = model.fit_generator(train_generator, samples_per_epoch=len(train_samples), validation_data=validation_generator, nb_val_samples=len(validation_samples), nb_epoch=3,  verbose=1)
+history = model.fit_generator(train_generator, samples_per_epoch=len(train_samples), validation_data=validation_generator, nb_val_samples=len(validation_samples), nb_epoch=5,  verbose=1)
 
 model.save('model.h5')
