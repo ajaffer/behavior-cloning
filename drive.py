@@ -19,6 +19,7 @@ from keras import __version__ as keras_version
 sio = socketio.Server()
 app = Flask(__name__)
 model = None
+use_adv_measurements = None
 prev_image_array = None
 
 
@@ -44,7 +45,7 @@ class SimplePIController:
 
 
 controller = SimplePIController(0.1, 0.002)
-set_speed = 20
+set_speed = 18
 controller.set_desired(set_speed)
 
 
@@ -52,24 +53,25 @@ controller.set_desired(set_speed)
 def telemetry(sid, data):
     if data:
         # The current steering angle of the car
-        curr_steering_angle = data["steering_angle"]
+        steering_angle = data["steering_angle"]
         # The current throttle of the car
-        curr_throttle = data["throttle"]
+        throttle = data["throttle"]
         # The current speed of the car
-        curr_speed = data["speed"]
+        speed = data["speed"]
         # The current image from the center camera of the car
         imgString = data["image"]
         image = Image.open(BytesIO(base64.b64decode(imgString)))
         image_array = np.asarray(image)
 
         # print('steering_angle, throttle, speed', steering_angle, throttle, speed)
-        pred_steering_angle, pred_throttle, pred_brake, pred_speed = (model.predict(image_array[None, :, :, :], batch_size=1))[0]
-        # pred_steering_angle = float(model.predict(image_array[None, :, :, :], batch_size=1))
+        if (use_adv_measurements):
+            steering_angle, throttle, brake, speed = (model.predict(image_array[None, :, :, :], batch_size=1))[0]
+        else:
+           steering_angle = float(model.predict(image_array[None, :, :, :], batch_size=1))
         
-        #overrwite the predicted throttle
-        cal_throttle = controller.update(float(curr_speed))
-        print(pred_steering_angle, cal_throttle)
-        send_control(pred_steering_angle, cal_throttle)
+        throttle = controller.update(float(speed))
+        print(steering_angle, throttle)
+        send_control(steering_angle, throttle)
 
         # save frame
         if args.image_folder != '':
@@ -103,6 +105,13 @@ if __name__ == '__main__':
         'model',
         type=str,
         help='Path to model h5 file. Model should be on the same path.'
+    )
+    parser.add_argument(
+        'use_adv_measurements',
+        type=bool,
+        nargs='?',
+        default='',
+        help=''
     )
     parser.add_argument(
         'image_folder',
