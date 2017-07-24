@@ -22,7 +22,7 @@ I did the following steps:
 [image7]: ./flipped.jpg "Flipped Image"
 [image8]: ./history.png "History"
 
-## Rubric Points
+# Rubric Points
 ###I am detailing all the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and how I addressed each point in my implementation.  
 
 ---
@@ -67,7 +67,7 @@ Training data was chosen to keep the vehicle driving on the road. I used a combi
 
 For details about how I created the training data, see the next section. 
 
-### Model Architecture and Training Strategy
+# Model Architecture and Training Strategy
 
 ## 1. Solution Design Approach
 
