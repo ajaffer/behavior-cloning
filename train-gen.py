@@ -6,6 +6,7 @@ flags = tf.app.flags
 FLAGS = flags.FLAGS
 
 flags.DEFINE_boolean('use_adv_measurements', '', "Boolean, if the algo should use adv. measurments: like throttle, brake and speed")
+flags.DEFINE_boolean('use_side_images', '', "Boolean, if true, we will use the right and left images as well")
 flags.DEFINE_boolean('use_lenet', '', "Boolean, use LeNet or Nvidia's model")
 flags.DEFINE_string('model_name', '', "String, output model name")
 flags.DEFINE_string('data', '', "String, a single data folder, or optionally a comma separated list of folder names")
@@ -51,23 +52,33 @@ def generator(samples, batch_size=32):
             measurements = []
             for batch_sample in batch_samples:
                 center_image = get_image(batch_sample[0])
-                left_image = get_image(batch_sample[1])
-                right_image = get_image(batch_sample[2])
                 center_angle = float(batch_sample[3])
                 throttle = float(batch_sample[4])
                 brake = float(batch_sample[5])
                 speed = float(batch_sample[6])
-                correction = 0.2
-                left_angle = center_angle + correction
-                right_angle = center_angle - correction
 
-                images.extend([center_image, left_image, right_image])
-                if (FLAGS.use_adv_measurements):
-                    measurements.append([center_angle, throttle, brake, speed])
-                    measurements.append([left_angle, throttle, brake, speed])
-                    measurements.append([right_angle, throttle, brake, speed])
+                if(FLAGS.use_side_images):
+                    left_image = get_image(batch_sample[1])
+                    right_image = get_image(batch_sample[2])
+                    images.extend([center_image, left_image, right_image])
+                    correction = 0.2
+                    left_angle = center_angle + correction
+                    right_angle = center_angle - correction
                 else:
-                    measurements.extend([center_angle, left_angle, right_angle])
+                    images.append(center_image)
+
+                if (FLAGS.use_adv_measurements):
+                    if (FLAGS.use_side_images):
+                        measurements.append([center_angle, throttle, brake, speed])
+                        measurements.append([left_angle, throttle, brake, speed])
+                        measurements.append([right_angle, throttle, brake, speed])
+                    else:    
+                        measurements.append([center_angle, throttle, brake, speed])
+                else:
+                    if (FLAGS.use_side_images):
+                        measurements.extend([center_angle, left_angle, right_angle])
+                    else:    
+                        measurements.append(center_angle)
 
             #augment images
             augmented_images, augmented_measurements = [], []
