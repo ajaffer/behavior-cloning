@@ -159,5 +159,8 @@ hist = model.fit_generator(train_generator, samples_per_epoch=len(train_samples)
 
 model.save(FLAGS.model_name)
 
+from keras.utils import plot_model
+plot_model(model, to_file='model.png')
+
 print('history')
 print(hist.history)
