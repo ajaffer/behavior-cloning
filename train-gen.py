@@ -155,10 +155,9 @@ else:
     nvidia(num_output)
 
 model.compile(loss='mse', optimizer='adam')
-history = model.fit_generator(train_generator, samples_per_epoch=len(train_samples), validation_data=validation_generator, nb_val_samples=len(validation_samples), nb_epoch=3,  verbose=1)
+hist = model.fit_generator(train_generator, samples_per_epoch=len(train_samples), validation_data=validation_generator, nb_val_samples=len(validation_samples), nb_epoch=3,  verbose=1)
 
 model.save(FLAGS.model_name)
 
-
-import pickle
-pickle.dump( history, open("history.p", "wb"))
+print('history')
+print(hist.history)
