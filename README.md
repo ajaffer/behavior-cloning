@@ -83,7 +83,7 @@ The final step was to run the simulator to see how well the car was driving arou
 
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
 
-####2. Final Model Architecture
+## 2. Final Model Architecture
 
 The final model architecture (model.py lines 18-24) consisted of a convolution neural network with the following layers and layer sizes
 
@@ -99,7 +99,7 @@ The final model architecture (model.py lines 18-24) consisted of a convolution n
 Here is a visualization of the architecture
 ![alt text][image1]
 
-####3. Creation of the Training Set & Training Process
+## 3. Creation of the Training Set & Training Process
 
 To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
 
