@@ -1,7 +1,3 @@
-#**Behavioral Cloning** 
-
-##Writeup
-
 ### The aim of this project is to train a CNN that can autonomously drive the car in the simulated evnironment. 
 
 ---
@@ -27,14 +23,10 @@ I did the following steps:
 [image8]: ./history.png "History"
 
 ## Rubric Points
-###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
+###I am detailing all the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and how I addressed each point in my implementation.  
 
 ---
-###Files Submitted & Code Quality
-
-####1. Submission includes all required files and can be used to run the simulator in autonomous mode
-
-My project includes the following files:
+1. My project includes the following files:
 * model.py containing the script to create and train the model
 Use this command to create and train the model: 
 ```sh 
@@ -42,54 +34,52 @@ python model.py --use_adv_measurements=false --use_lenet=false --model_name=mode
 ```
 * drive.py for driving the car in autonomous mode
 * model.h5 containing a trained convolution neural network 
-* this file: summarizing the results
 
-####2. Submission includes functional code
-Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
+
+2. Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
 ```sh
 python drive.py model.h5 use_adv_measurements=false
 ```
 
-####3. Submission code is usable and readable
-The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
+3. The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
 
-###Model Architecture and Training Strategy
+Model Architecture and Training Strategy
 
-####1. An appropriate model architecture has been employed
+## 1. Model architecture
 I researched using LeNet and nvidia CNNs. I chose the nvidia one (line #136)
 
 My nvidia model consists of 5 convolution neural network, the first two have a 5x5 filter sizes and the next three have a 3x3 filter and depths between 50 and 100 (model.py lines 136-147) 
 
 The model includes RELU layers to introduce nonlinearity (code lines 137, 139, 141, 142, 143), and the data is normalized in the model using a Keras lambda layer (code line 121). 
 
-####2. Attempts to reduce overfitting in the model
+## 2. Attempts to reduce overfitting in the model
 
 The model was trained and validated on different data sets to ensure that the model was not overfitting. The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
 
 
-####3. Model parameter tuning
+## 3. Model parameter tuning
 
 The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 159).
 
-####4. Appropriate training data
+## 4. Appropriate training data
 
 Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road, dirving smoothly during curves, driving in the opposite direction and driving on the track two. 
 
 For details about how I created the training data, see the next section. 
 
-###Model Architecture and Training Strategy
+### Model Architecture and Training Strategy
 
-####1. Solution Design Approach
+## 1. Solution Design Approach
 
-The overall strategy for deriving a model architecture was to take small steps and fix the issues, e.g., car driving straight on a curve and falling into water.
+The overall strategy for deriving a model architecture was to start with the simplest model and resarch using better models.
 
 My first step was to use a convolution neural network model similar to LeNet I thought this model might be appropriate because the lane lines can be thought to have features similar to the features of letters and numbers, i.e., lines and curves.
 
-I tried many ideas on how to make the car drive naturally around the track. I experimented with using what I called 'advanced measurements' in addition to just using the steering angle, i.e., throttle, brake and speed. Using these 'advanced measurement' did not provide better results. Both the training and validation errors were higher than before. 
+I tried more ideas on how to make the car drive naturally around the track. I experimented with using what I called 'advanced measurements' in addition to just using the steering angle, i.e., throttle, brake and speed. Using these 'advanced measurement' did not provide better results. Both the training and validation errors were higher than before, therefore I did not use the 'advanced measurements.' 
 
 Then I used the CNN from the this paper: http://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf 
 
-The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track... to improve the driving behavior in these cases, I ....
+The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track while going on the curvy parts, to improve the driving behavior in these cases, I recorded the car recovering from these areas.
 
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
 
