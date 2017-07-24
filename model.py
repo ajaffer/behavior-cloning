@@ -11,6 +11,8 @@ flags.DEFINE_boolean('use_side_images', '', "Boolean, if true, we will use the r
 flags.DEFINE_boolean('use_lenet', '', "Boolean, use LeNet or Nvidia's model")
 flags.DEFINE_string('model_name', '', "String, output model name")
 flags.DEFINE_string('data', '', "String, a single data folder, or optionally a comma separated list of folder names")
+flags.DEFINE_integer('nb_epoch', '', "Number of EPOCHS")
+
 
 samples = []
 
@@ -157,7 +159,7 @@ else:
     nvidia(num_output)
 
 model.compile(loss='mse', optimizer='adam')
-hist = model.fit_generator(train_generator, samples_per_epoch=len(train_samples), validation_data=validation_generator, nb_val_samples=len(validation_samples), nb_epoch=3,  verbose=1)
+hist = model.fit_generator(train_generator, samples_per_epoch=len(train_samples), validation_data=validation_generator, nb_val_samples=len(validation_samples), nb_epoch=FLAGS.nb_epoch,  verbose=1)
 
 model.save(FLAGS.model_name)
 
