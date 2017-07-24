@@ -65,8 +65,6 @@ The model includes RELU layers to introduce nonlinearity (code lines 137, 139, 1
 ####2. Attempts to reduce overfitting in the model
 
 The model was trained and validated on different data sets to ensure that the model was not overfitting. The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
-Following image shows how both the training and validtion errors were low, showing that the model is not overfitting.
-![alt text][image8]
 
 
 ####3. Model parameter tuning
@@ -134,4 +132,5 @@ After the collection process, I had 17944 number of data points. I then preproce
 
 I finally randomly shuffled the data set and put 20% of the data into a validation set. 
 
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 3 as evidenced by ... I used an adam optimizer so that manually training the learning rate wasn't necessary.
+I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 3 as evidenced by the following data and image. I used an adam optimizer so that manually training the learning rate wasn't necessary.
+![alt text][image8]
