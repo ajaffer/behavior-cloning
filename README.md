@@ -11,7 +11,7 @@
 I did the following steps:
 
 * Used the simulator to collect the following data points: Driving in the center, driving in the opposite direction, recovering from driving over the lane lines, driving on the track two.
-* Built two convolution neural networks in Keras that predicts steering angles from images
+* Built a convolution neural network in Keras that predicts steering angles from images
 * Trained and validated the model with a training and validation set
 * Tested that the model can successfully drive around track one without leaving the road
 
