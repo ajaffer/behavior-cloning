@@ -1,0 +1,41 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Activation	../train.py	/^from keras.layers import Flatten, Dense, Lambda, Activation$/;"	kind:namespace	line:50
+Activation	../train.py	/^from keras.layers.core import Dense, Activation, Flatten, Dropout$/;"	kind:namespace	line:56
+Conv2D	../train.py	/^from keras.layers.convolutional import Conv2D$/;"	kind:namespace	line:52
+Convolution2D	../train.py	/^from keras.layers.convolutional import Convolution2D$/;"	kind:namespace	line:57
+Cropping2D	../train.py	/^from keras.layers import Cropping2D$/;"	kind:namespace	line:51
+Dense	../train.py	/^from keras.layers import Flatten, Dense, Lambda, Activation$/;"	kind:namespace	line:50
+Dense	../train.py	/^from keras.layers.core import Dense, Activation, Flatten, Dropout$/;"	kind:namespace	line:56
+Dropout	../train.py	/^from keras.layers.core import Dense, Activation, Flatten, Dropout$/;"	kind:namespace	line:56
+Flatten	../train.py	/^from keras.layers import Flatten, Dense, Lambda, Activation$/;"	kind:namespace	line:50
+Flatten	../train.py	/^from keras.layers.core import Dense, Activation, Flatten, Dropout$/;"	kind:namespace	line:56
+Lambda	../train.py	/^from keras.layers import Flatten, Dense, Lambda, Activation$/;"	kind:namespace	line:50
+MaxPooling2D	../train.py	/^from keras.layers.pooling import MaxPooling2D$/;"	kind:namespace	line:53
+MaxPooling2D	../train.py	/^from keras.layers.pooling import MaxPooling2D$/;"	kind:namespace	line:58
+Sequential	../train.py	/^from keras.models import Sequential$/;"	kind:namespace	line:49
+Sequential	../train.py	/^from keras.models import Sequential$/;"	kind:namespace	line:55
+X_train	../train.py	/^X_train = np.array(augmented_car_images)$/;"	kind:variable	line:43
+car_images	../train.py	/^car_images = []$/;"	kind:variable	line:17
+correction	../train.py	/^   correction = 0.2$/;"	kind:variable	line:21
+csv	../train.py	/^import csv$/;"	kind:namespace	line:1
+cv2	../train.py	/^import cv2$/;"	kind:namespace	line:2
+get_image	../train.py	/^def get_image(source_path):$/;"	kind:function	line:5
+history	../train.py	/^history = model.fit(X_train, y_train, nb_epoch=5, validation_split=0.2)$/;"	kind:variable	line:125
+img_center	../train.py	/^   img_center = get_image(line[0])$/;"	kind:variable	line:25
+img_left	../train.py	/^   img_left = get_image(line[1])$/;"	kind:variable	line:26
+img_right	../train.py	/^   img_right = get_image(line[2])$/;"	kind:variable	line:27
+lines	../train.py	/^lines = []$/;"	kind:variable	line:11
+model	../train.py	/^model = Sequential()$/;"	kind:variable	line:60
+np	../train.py	/^import numpy as np$/;"	kind:namespace	line:3
+reader	../train.py	/^   reader = csv.reader(csvfile)$/;"	kind:variable	line:13
+steering_angles	../train.py	/^steering_angles = []$/;"	kind:variable	line:18
+steering_center	../train.py	/^   steering_center = float(line[3])$/;"	kind:variable	line:20
+steering_left	../train.py	/^   steering_left = steering_center + correction$/;"	kind:variable	line:22
+steering_right	../train.py	/^   steering_right = steering_center - correction$/;"	kind:variable	line:23
+train.py	../train.py	1;"	kind:file	line:1
+y_train	../train.py	/^y_train = np.array(augmented_steering_angles)$/;"	kind:variable	line:44
